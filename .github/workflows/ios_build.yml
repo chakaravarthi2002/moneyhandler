@@ -8,7 +8,7 @@ on:
 jobs:
   build-ios:
     name: Build iOS App on Cloud Mac
-    runs-on: macos-latest
+    runs-on: macos-14
 
     steps:
       - name: Checkout Code
@@ -22,11 +22,14 @@ jobs:
 
       - name: Build iOS App with xcodebuild
         run: |
-          xcodebuild -project iosApp/iosApp.xcodeproj \
-                     -target iosApp \
-                     -sdk iphonesimulator \
+          xcodebuild build \
+                     -project iosApp/iosApp.xcodeproj \
+                     -scheme iosApp \
+                     -destination 'generic/platform=iOS Simulator' \
                      -configuration Release \
                      -derivedDataPath build \
+                     CODE_SIGN_IDENTITY="" \
+                     CODE_SIGNING_REQUIRED=NO \
                      CODE_SIGNING_ALLOWED=NO
 
       - name: Package iOS App
