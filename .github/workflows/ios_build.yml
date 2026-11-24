@@ -23,12 +23,10 @@ jobs:
       - name: Build iOS App with xcodebuild
         run: |
           xcodebuild -project iosApp/iosApp.xcodeproj \
-                     -scheme iosApp \
+                     -target iosApp \
                      -sdk iphonesimulator \
                      -configuration Release \
                      -derivedDataPath build \
-                     CODE_SIGN_IDENTITY="" \
-                     CODE_SIGNING_REQUIRED=NO \
                      CODE_SIGNING_ALLOWED=NO
 
       - name: Package iOS App
